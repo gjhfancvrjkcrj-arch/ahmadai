@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
 
 interface SettingsPageProps {
-    isLifetimeUser: boolean;
+    currentUserPlan: string;
     onNavigateToPricing: () => void;
 }
 
-const SettingsPage: React.FC<SettingsPageProps> = ({ isLifetimeUser, onNavigateToPricing }) => {
+const SettingsPage: React.FC<SettingsPageProps> = ({ currentUserPlan, onNavigateToPricing }) => {
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [confirmNewPassword, setConfirmNewPassword] = useState('');
     const [message, setMessage] = useState('');
     const [error, setError] = useState('');
 
-    const planName = isLifetimeUser ? 'خطة مدى الحياة' : 'الخطة الأساسية';
-    const planDescription = isLifetimeUser ? 'لديك وصول كامل وغير محدود لجميع الميزات.' : 'تتضمن 10 تعديلات صور يومياً. يمكنك الترقية للوصول إلى ميزات أكثر.';
+    const planName = currentUserPlan === 'أساسي' ? 'الخطة الأساسية' : currentUserPlan;
+    const planDescription = currentUserPlan !== 'أساسي' ? 'لديك وصول كامل وغير محدود لجميع الميزات.' : 'تتضمن 10 تعديلات صور يومياً. يمكنك الترقية للوصول إلى ميزات أكثر.';
 
     const handleChangePassword = (e: React.FormEvent) => {
         e.preventDefault();

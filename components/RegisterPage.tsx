@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { SparklesIcon, EnvelopeIcon, LockClosedIcon } from './icons';
 
 interface RegisterPageProps {
     onRegisterSuccess: (email: string) => void;
@@ -32,22 +33,28 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess, onNaviga
 
     return (
         <div className="flex items-center justify-center min-h-[calc(100vh-64px)] py-12 px-4 sm:px-6 lg:px-8">
-            <div className="max-w-md w-full space-y-8 bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 shadow-2xl">
-                <div>
-                     <h2 className="mt-6 text-center text-3xl font-extrabold text-white">
+            <div className="max-w-md w-full space-y-8 animate-fadeInUp">
+              <div className="bg-gray-800/80 backdrop-blur-sm border border-gray-700 rounded-2xl p-8 shadow-2xl">
+                <div className="text-center">
+                    <div className="mx-auto flex items-center justify-center h-12 w-12 rounded-full bg-purple-600/20 mb-6">
+                        <SparklesIcon className="h-6 w-6 text-purple-400" />
+                    </div>
+                     <h2 className="text-3xl font-extrabold text-white">
                         إنشاء حساب جديد
                     </h2>
-                    <p className="mt-2 text-center text-sm text-gray-400">
+                    <p className="mt-2 text-sm text-gray-400">
                         هل لديك حساب بالفعل؟{' '}
-                        <button onClick={onNavigateToLogin} className="font-medium text-purple-400 hover:text-purple-300">
+                        <button onClick={onNavigateToLogin} className="font-medium text-purple-400 hover:text-purple-300 transition-colors duration-200">
                             سجل الدخول من هنا
                         </button>
                     </p>
                 </div>
                 <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
-                    <div className="rounded-md shadow-sm -space-y-px">
-                        <div>
-                            <label htmlFor="email-address" className="sr-only">البريد الإلكتروني</label>
+                    <div className="space-y-4 rounded-md shadow-sm">
+                        <div className="relative">
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                               <EnvelopeIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                            </div>
                             <input
                                 id="email-address"
                                 name="email"
@@ -56,12 +63,14 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess, onNaviga
                                 required
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
-                                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm rounded-t-md"
+                                className="appearance-none relative block w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-3 pr-10 text-white placeholder-gray-400 transition-colors duration-200 focus:z-10 focus:border-purple-500 focus:outline-none focus:ring-purple-500 sm:text-sm"
                                 placeholder="البريد الإلكتروني"
                             />
                         </div>
-                        <div>
-                            <label htmlFor="password" className="sr-only">كلمة المرور</label>
+                        <div className="relative">
+                            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                               <LockClosedIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                            </div>
                             <input
                                 id="password"
                                 name="password"
@@ -69,12 +78,14 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess, onNaviga
                                 required
                                 value={password}
                                 onChange={(e) => setPassword(e.target.value)}
-                                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm"
+                                className="appearance-none relative block w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-3 pr-10 text-white placeholder-gray-400 transition-colors duration-200 focus:z-10 focus:border-purple-500 focus:outline-none focus:ring-purple-500 sm:text-sm"
                                 placeholder="كلمة المرور"
                             />
                         </div>
-                        <div>
-                            <label htmlFor="confirm-password" className="sr-only">تأكيد كلمة المرور</label>
+                        <div className="relative">
+                           <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+                               <LockClosedIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
+                            </div>
                             <input
                                 id="confirm-password"
                                 name="confirm-password"
@@ -82,23 +93,24 @@ const RegisterPage: React.FC<RegisterPageProps> = ({ onRegisterSuccess, onNaviga
                                 required
                                 value={confirmPassword}
                                 onChange={(e) => setConfirmPassword(e.target.value)}
-                                className="appearance-none rounded-none relative block w-full px-3 py-3 border border-gray-600 bg-gray-700 text-white placeholder-gray-400 focus:outline-none focus:ring-purple-500 focus:border-purple-500 focus:z-10 sm:text-sm rounded-b-md"
+                                className="appearance-none relative block w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-3 pr-10 text-white placeholder-gray-400 transition-colors duration-200 focus:z-10 focus:border-purple-500 focus:outline-none focus:ring-purple-500 sm:text-sm"
                                 placeholder="تأكيد كلمة المرور"
                             />
                         </div>
                     </div>
 
-                    {error && <p className="text-red-400 text-sm text-center">{error}</p>}
+                    {error && <p className="text-red-400 text-sm text-center pt-2">{error}</p>}
 
-                    <div className="pt-2">
+                    <div>
                         <button
                             type="submit"
-                            className="group relative w-full flex justify-center py-3 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-purple-500"
+                            className="group relative w-full flex justify-center rounded-md border border-transparent bg-purple-600 py-3 px-4 text-sm font-medium text-white transition-all duration-300 ease-in-out hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:ring-offset-gray-800 hover:scale-105"
                         >
                             إنشاء الحساب
                         </button>
                     </div>
                 </form>
+            </div>
             </div>
         </div>
     );

@@ -1,6 +1,6 @@
 import React from 'react';
 import { Page } from '../types';
-import { LogoutIcon, SettingsIcon, SparklesIcon, GiftIcon, PhotoIcon, PencilSquareIcon, RectangleStackIcon } from './icons';
+import { LogoutIcon, SettingsIcon, SparklesIcon, GiftIcon, PhotoIcon, PencilSquareIcon, RectangleStackIcon, KeyIcon } from './icons';
 
 interface HeaderProps {
     isLoggedIn: boolean;
@@ -9,9 +9,11 @@ interface HeaderProps {
     onLogout: () => void;
     onNavigate: (page: Page) => void;
     currentPage: Page;
+    currentUserEmail: string | null;
+    currentUserPlan: string;
 }
 
-const Header: React.FC<HeaderProps> = ({ isLoggedIn, isLifetimeUser, imageCredits, onLogout, onNavigate, currentPage }) => {
+const Header: React.FC<HeaderProps> = ({ isLoggedIn, isLifetimeUser, imageCredits, onLogout, onNavigate, currentPage, currentUserEmail, currentUserPlan }) => {
     
     const navButtonClasses = (page: Page) => {
         const isActive = currentPage === page;
@@ -41,11 +43,21 @@ const Header: React.FC<HeaderProps> = ({ isLoggedIn, isLifetimeUser, imageCredit
                                     <RectangleStackIcon className="h-6 w-6" />
                                </button>
 
+                                {currentUserEmail === 'lifetime@user.com' && (
+                                   <button 
+                                        onClick={() => onNavigate(Page.Generator)} 
+                                        className={navButtonClasses(Page.Generator)} 
+                                        aria-label="مولد الحسابات"
+                                    >
+                                        <KeyIcon className="h-6 w-6" />
+                                   </button>
+                                )}
+
                                 <div className="border-l border-gray-600 h-6 mx-1 sm:mx-2"></div>
 
                                <div className="flex items-center space-x-2 bg-gray-700/50 rounded-full px-3 py-1.5">
                                    <PhotoIcon className="h-5 w-5 text-gray-400"/>
-                                   <span className="text-sm font-medium text-white">{isLifetimeUser ? 'غير محدود' : imageCredits}</span>
+                                   <span className="text-sm font-medium text-white">{isLifetimeUser ? currentUserPlan : imageCredits}</span>
                                </div>
                                 <div className="border-l border-gray-600 h-6 mx-1 sm:mx-2"></div>
                                 <button

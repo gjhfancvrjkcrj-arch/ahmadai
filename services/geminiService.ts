@@ -21,13 +21,13 @@ export async function editImageWithPrompt(base64Image: string, mimeType: string,
             contents: {
                 parts: [
                     {
+                        text: prompt,
+                    },
+                    {
                         inlineData: {
                             data: base64Image,
                             mimeType: mimeType,
                         },
-                    },
-                    {
-                        text: prompt,
                     },
                 ],
             },
@@ -67,6 +67,9 @@ export async function mergeImagesWithPrompt(
             contents: {
                 parts: [
                     {
+                        text: prompt,
+                    },
+                    {
                         inlineData: {
                             data: base64Image1,
                             mimeType: mimeType1,
@@ -77,9 +80,6 @@ export async function mergeImagesWithPrompt(
                             data: base64Image2,
                             mimeType: mimeType2,
                         },
-                    },
-                    {
-                        text: prompt,
                     },
                 ],
             },

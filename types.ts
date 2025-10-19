@@ -6,6 +6,7 @@ export enum Page {
   Settings,
   Tasks,
   Merge,
+  Generator,
 }
 
 export interface Task {
@@ -14,4 +15,11 @@ export interface Task {
   description: string;
   reward: number;
   status: 'available' | 'claimable' | 'claimed';
+}
+
+export interface GeneratedAccount {
+    email: string;
+    pass: string;
+    subscriptionType: string;
+    expiresAt: number | null;
 }
